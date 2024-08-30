@@ -8,8 +8,11 @@ if [ -z "$base_commit" ] || [ -z "$head_commit" ]; then
     exit 1
 fi
 
+echo "Base $base_commit"
+echo "Head $head_commit"
+
 fe_files=$(git diff --name-only "$base_commit" "$head_commit" | grep -E '\.vue$|\.ts$')
-echo $fe_files
+echo "FE files $fe_files"
 go_files=$(git diff --name-only "$base_commit" "$head_commit" | grep '\.go$')
 missing_flags=()
 
