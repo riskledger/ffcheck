@@ -4,6 +4,7 @@ runs:
   using: "composite"
   steps:
   - name: Check for feature flag usage
+    shell: bash
     run: |
       output=$(./FFCheck.sh ${{ github.event.pull_request.base.sha }} ${{ github.sha }})
       echo "$output"
