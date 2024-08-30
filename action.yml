@@ -9,7 +9,7 @@ runs:
   - name: Check for feature flag usage
     shell: bash
     run: |
-      output=$(${{github.action_path}}/ffcheck.sh ${{ github.event.pull_request.base.sha }} ${ git rev-parse HEAD })
+      output=$(${{github.action_path}}/ffcheck.sh ${{ github.event.pull_request.base.sha }} $(git rev-parse HEAD ))
       echo "$output"
       if [ $? -ne 0 ]; then
         echo "::set-output name=missing_flags::$output"
