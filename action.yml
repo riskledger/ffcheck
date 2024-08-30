@@ -4,6 +4,7 @@ runs:
   using: "composite"
   steps:
   - name: List files (for debugging)
+    shell: bash
     run: ls -alh
   - name: Check for feature flag usage
     shell: bash
