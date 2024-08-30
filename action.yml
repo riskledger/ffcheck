@@ -6,7 +6,7 @@ runs:
   - name: Check for feature flag usage
     shell: bash
     run: |
-      output=$(./FFCheck.sh ${{ github.event.pull_request.base.sha }} ${{ github.sha }})
+      output=$(./ffcheck.sh ${{ github.event.pull_request.base.sha }} ${{ github.sha }})
       echo "$output"
       if [ $? -ne 0 ]; then
         echo "::set-output name=missing_flags::$output"
