@@ -1,0 +1,25 @@
+name: Feature Flag Check
+
+runs:
+  using: "composite"
+  steps:
+  - name: Check for feature flag usage
+    run: |
+      output=$(./FFCheck.sh ${{ github.event.pull_request.base.sha }} ${{ github.sha }})
+      echo "$output"
+      if [ $? -ne 0 ]; then
+        echo "::set-output name=missing_flags::$output"
+      fi
+  - name: Comment on PR
+    if: steps.check_flags.outputs.missing_flags
+    uses: actions/github-script@v6
+    with:
+      script: |
+          const output = `${{ steps.check_flags.outputs.missing_flags }}`;
+          const message = `You've not used feature flags, sort it out!\n\n${output}`;
+          github.rest.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: message
+          })
