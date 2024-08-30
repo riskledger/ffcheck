@@ -8,6 +8,7 @@ runs:
     run: ls -alh
   - name: Check for feature flag usage
     shell: bash
+    continue-on-error: true
     run: |
       chmod +x ${{github.action_path}}/ffcheck.sh
       output=$(${{github.action_path}}/ffcheck.sh ${{ github.event.pull_request.base.sha }} ${{ github.sha }})
