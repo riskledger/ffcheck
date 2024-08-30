@@ -10,8 +10,9 @@ runs:
     shell: bash
     run: |
       output=$(${{github.action_path}}/ffcheck.sh ${{ github.event.pull_request.base.sha }} ${{ github.sha }})
+      exit_code=$?
       echo "$output"
-      if [ $? -ne 0 ]; then
+      if [ $exit_code -ne 0 ]; then
         echo "::set-output name=missing_flags::$output"
       fi
   - name: Comment on PR
