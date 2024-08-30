@@ -1,4 +1,5 @@
 #!/bin/bash
+set -x
 
 base_commit=$1
 head_commit=$2

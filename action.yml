@@ -9,6 +9,7 @@ runs:
   - name: Check for feature flag usage
     shell: bash
     run: |
+      chmod +x ${{github.action_path}}/ffcheck.sh
       output=$(${{github.action_path}}/ffcheck.sh ${{ github.event.pull_request.base.sha }} ${{ github.sha }})
       exit_code=$?
       echo "$output"
